@@ -1,0 +1,20 @@
+{
+    "exclude": [],
+    "languages": {
+      "ts": {
+        "sidekick-tslint": {
+            "failCiOnError": true
+        }
+      },
+      "json": {
+          "sidekick-david": {
+              "failCiOnError": false
+          }
+      },
+      "all": {
+        "sidekick-security": {
+            "failCiOnError": true
+        }
+      }
+    }
+}
