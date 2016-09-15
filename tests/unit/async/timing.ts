@@ -12,14 +12,14 @@ registerSuite({
 		'resolves a promise after the given timeout': function () {
 			return timing.delay(251)(Date.now()).then(function (start: number) {
 				const diff: number = Date.now() - start;
-				assert.isAbove(diff, 250);
+				assert.isAbove(diff, 249);
 			});
 		}
 	},
 
 	'timeout()': {
 		'called before the timeout; resolves the promise': function () {
-			return Promise.resolve('unused').then(timing.timeout(100, new Error('Error')));
+			return Promise.resolve('unused').then((<any> timing).timeout(100, new Error('Error')));
 		},
 
 		'called after the timeout; rejects the promise': function () {
@@ -35,7 +35,7 @@ registerSuite({
 			const start = Date.now();
 			return new timing.DelayedRejection(101).then<any>(throwImmediatly, function (reason) {
 				assert.isUndefined(reason);
-				assert.isAbove(Date.now(), start + 100);
+				assert.isAbove(Date.now(), start + 99);
 				return true;
 			});
 		},
@@ -45,7 +45,7 @@ registerSuite({
 			const expectedError = new Error('boom!');
 			return new timing.DelayedRejection(101, expectedError).then<any>(throwImmediatly, function (reason) {
 				assert.strictEqual(reason, expectedError);
-				assert.isAbove(Date.now(), start + 100);
+				assert.isAbove(Date.now(), start + 99);
 				return true;
 			});
 		},

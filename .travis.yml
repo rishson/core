@@ -1,7 +1,7 @@
 sudo: false
 language: node_js
 node_js:
-- '5.1'
+- '6'
 env:
   global:
   # Please get your own free key if you want to test yourself
@@ -13,9 +13,8 @@ cache:
   directories:
   - node_modules
 install:
-# - travis_retry npm install grunt-cli $(node -e "var deps = require('./package.json').peerDependencies;
-#   for(var name in deps) process.stdout.write(name + '@' + deps[name] + ' ');")
-# - travis_retry npm install
+- travis_retry npm install grunt-cli
+- travis_retry npm install
 - npm i sidekick
 script:
 # - grunt
@@ -23,7 +22,7 @@ script:
 # - grunt intern:saucelabs --combined
 # - grunt remapIstanbul:ci
 # - grunt uploadCoverage
-- sidekick run --travis
+- sidekick run --ci
 notifications:
   slack:
   # secure: ZuM/LrujGyUs8r/KGYtxaqRHNVyAMhQi+nrbfhxxqrfXqfFoikMqwGSlY4728MvOEj3ptJhcqjxHTp+rnajXTHkEXJ6y7yfIGekd5523dGVooESIu6oFjmh0iIVxJWLhxQ+DwABRYX0FsPAIMZCCVuK/0EM6Pw00uPwiPjmeRkylV+lUkEoWkuKCTxuaBDgY4ITDGprDVGmtJRQp7Weov4IOlfGLVdoupVd1AmXq5OyvpW4fVtBKR+aph0jAqSVOMFIas77njKKoSPzxGtqf1110MQ1QJc7yTY6J6XFZEPpv15cRjo/LRZFx3xf/hwAufxnZR0L1bxvuVG9mfn4q8m1Wgq6JyoWfg+DC12KSfo9Y2MJCIi/mAh5NkiP6wzsryhnQVLDKlnN5P611DuxeImsxYXMoZMqoZ/eT2djdm2PkJCwGilCRM1aTU2dfqpwbdM4aD88FzCfICigNuaIXhzinDrrBQtIn6EoRkqw0T1lplMxeG+lt2SLpcPsZmtjNVrFqb8lNQPm1RWOuo9toCPYeKnIBZt3wzTuEoj27nTVarNLQK1S74IyP8kKvnjtEeUGD0/a4ow9FnUCnARNfSx62ksB5sJV5DV4zi5tzuowTZsvyUM6tpt1U3SiKEIDIteurdS1G7vCNArucvP5cxCVqYbrgaFdRmJMEwvrAqXc=

@@ -10,7 +10,7 @@ export const Canceled = <State> 4;
  * @param value The value to guard
  */
 export function isTask<T>(value: any): value is Task<T> {
-	return Boolean(isThenable(value) && typeof value.cancel === 'function' && Array.isArray(value.children));
+	return Boolean(value && typeof value.cancel === 'function' && Array.isArray(value.children) && isThenable(value));
 }
 
 /**
@@ -136,8 +136,10 @@ export default class Task<T> extends Promise<T> {
 		return task;
 	}
 
-	then<U>(onFulfilled?: (value: T) => U | Thenable<U>,  onRejected?: (error: Error) => U | Thenable<U>): Task<U> {
-		const task = <Task<U>> super.then<U>(
+	then<U>(onFulfilled?: (value: T | undefined) => U | Thenable<U>,  onRejected?: (error: Error | undefined) => U | Thenable<U>): Task<U> {
+		// FIXME
+		// tslint:disable-next-line:no-var-keyword
+		var task = <Task<U>> super.then<U>(
 			// Don't call the onFulfilled or onRejected handlers if this Task is canceled
 			function (value) {
 				if (task._state === Canceled) {
